@@ -98,9 +98,19 @@ This is a tool to automatically find the configuration for Rclone
 ``` wget http://rclone.vnclouds.co/rclone.sh``` 
 
 After installation everything will be automatic and you do not need to do anything else if you are using the following vps controls.
-##### 1: Vestacp 
-##### 2: Centos webpanel
-##### 3: Kusanagi
-##### 4: directadmin
-##### 5: easyengine 
+##### Vestacp 
+##### centos webpanel
+##### Kusanagi
+##### directadmin
+##### easyengine 
 The guest vps control please contact for installation assistance automatically: vituong[at]vnclouds.co
+For controls not in the list or you have customized it, please revise the code
+```
+MYSQL_USER="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 3p)"
+MYSQL_PASSWORD="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 2p)"
+```
+You need to replace them as follows
+```
+MYSQL_USER=root
+MYSQL_PASSWORD= user pass root mysql your vps
+```
