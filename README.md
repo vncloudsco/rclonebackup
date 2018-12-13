@@ -120,3 +120,5 @@ You need to replace them as follows
 MYSQL_USER=root
 MYSQL_PASSWORD= user pass root mysql your vps
 ```
+
+Report Bug to: support[at]vnclouds.edu.vn
