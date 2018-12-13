@@ -79,18 +79,24 @@ Installation with Ansible
 This can be done with Stefan Weichinger’s ansible role.
 
 Instructions
+
 ```git clone https://github.com/stefangweichinger/ansible-rclone.git``` into your local roles-directory
 add the role to the hosts you want rclone installed to: 
+
 ```
     - hosts: rclone-hosts
       roles:
           - rclone
 ```
+
 # Install Backup VNC
+
 This is a tool to automatically find the configuration for Rclone
+
 ### install 
 
 ``` wget http://rclone.vnclouds.co/rclone.sh``` 
+
 After installation everything will be automatic and you do not need to do anything else if you are using the following vps controls.
 ##### Vestacp 
 ##### centos webpanel
