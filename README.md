@@ -103,6 +103,7 @@ After installation everything will be automatic and you do not need to do anythi
 ##### 3: Kusanagi
 ##### 4: directadmin
 ##### 5: easyengine 
+##### 6: cyberpanel
 The guest vps control please contact for installation assistance automatically: vituong[at]vnclouds.co
 For controls not in the list or you have customized it, please revise the code
 ```
