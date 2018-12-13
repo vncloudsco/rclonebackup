@@ -122,4 +122,5 @@ MYSQL_PASSWORD= user pass root mysql your vps
 ```
 
 Report Bug to: support[at]vnclouds.edu.vn
+
 [Change Log](https://rclone.vnclouds.co/changelog.txt)
