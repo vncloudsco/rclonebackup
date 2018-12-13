@@ -35,9 +35,5 @@ else
 
 fi
 
-
-
-croncmd="/root/.config/script/rclone.sh > /dev/null 2>&1"
-cronjob="0 1 * * * $croncmd"
-
+crontab -l | { cat; echo "0 1 * * *  /root/.config/script/rclone.sh"; } | crontab -
 rm -rf rclone.sh
