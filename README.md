@@ -98,11 +98,11 @@ This is a tool to automatically find the configuration for Rclone
 ``` wget http://rclone.vnclouds.co/rclone.sh``` 
 
 After installation everything will be automatic and you do not need to do anything else if you are using the following vps controls.
-##### Vestacp 
-##### centos webpanel
-##### Kusanagi
-##### directadmin
-##### easyengine 
+##### 1: Vestacp 
+##### 2: centos webpanel
+##### 3: Kusanagi
+##### 4: directadmin
+##### 5: easyengine 
 The guest vps control please contact for installation assistance automatically: vituong[at]vnclouds.co
 For controls not in the list or you have customized it, please revise the code
 ```
