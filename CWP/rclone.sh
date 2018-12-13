@@ -6,8 +6,8 @@ SERVER_NAME="$(ifconfig | grep broadcast | awk {'print $2'} | head -1)" # get IP
 TIMESTAMP=$(date +"%F")
 BACKUP_DIR="/root/backup/$TIMESTAMP"
 MYSQLPATH="$(mysql --help | grep "Default options" -A 1 | sed -n 2p | awk {'print $2'} | sed 's/\~/\/root/')"
-MYSQL_USER="$(cat /usr/local/directadmin/scripts/setup.txt | grep mysqluser | sed 's/\mysqluser=//')"
-MYSQL_PASSWORD="$(cat /usr/local/directadmin/scripts/setup.txt | grep mysql= | sed 's/\mysql=//')"
+MYSQL_USER="$(cat .my.cnf | grep user= | awk -F '=' {'print $NF'})"
+MYSQL_PASSWORD="$(cat .my.cnf | grep password= | awk -F '=' {'print $NF'})"
 MYSQL="$(which mysql)"
 MYSQLDUMP="$(which mysqldump)"
 SECONDS=0
@@ -21,6 +21,7 @@ SENTORA="$(ls /var/ | grep sentora)"
 KUSANAGI="$(ls /home/ | grep kusanagi)"
 CWP="$(ls /usr/local/ | grep cwpsrv)"
 DA="$(ls /usr/local/ | grep directadmin)"
+VESTA="$(ls /usr/local/ | grep vesta)"
 EE="$(ls /etc/ | grep ee)"
 VNC_RCLONE="$(rclone config file | grep rclone.conf | sed 's/rclone.conf//')"
 VNC_RCLONE_REMOTE="$(cat $VNC_RCLONE/rclone.conf | grep "\[" | sed 's/\[//' | sed 's/\]//')"
@@ -90,6 +91,22 @@ elif [[ "$EE" = "ee" ]]; then
      	   zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
    	 fi
 	done
+
+elif [[ "$VESTA" = "vesta" ]]; then
+
+	echo "VPS User vestacp ";
+	echo "Backup vestacp Config";
+	cp /usr/local/vesta $BACKUP_DIR/vesta
+	cp /usr/local/vesta/php/var/log/php-fpm.log $BACKUP_DIR/vesta/php-fpm.log
+	for D in /home/*; do
+    	if [ -d "${D}" ]; then #If a directory
+        	domain=${D##*/} # Domain name
+        	echo "- "$domain;
+      	  zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
+    	fi
+	done
+
+
 elif [[ "$CWP" = "cwpsrv" ]]; then
 
 	echo "VPS User CWP ";
