@@ -17,11 +17,7 @@ NGINX_DIR="$(nginx -V 2>&1 | grep -o '\-\-conf-path=\(.*conf\)' | grep -o '.*/' 
 HTTPD="$(ls /etc/ | grep -w httpd)"
 HTTPD_DIR="$(httpd -S 2>&1 | grep ServerRoot | sed 's/\"//g' | awk {'print $2'})"
 LOG_DIR=/var/log/
-SENTORA="$(ls /var/ | grep sentora)"
-KUSANAGI="$(ls /home/ | grep kusanagi)"
-CWP="$(ls /usr/local/ | grep cwpsrv)"
 DA="$(ls /usr/local/ | grep directadmin)"
-EE="$(ls /etc/ | grep ee)"
 VNC_RCLONE="$(rclone config file | grep rclone.conf | sed 's/rclone.conf//')"
 VNC_RCLONE_REMOTE="$(cat $VNC_RCLONE/rclone.conf | grep "\[" | sed 's/\[//' | sed 's/\]//')"
 mkdir -p "$BACKUP_DIR"

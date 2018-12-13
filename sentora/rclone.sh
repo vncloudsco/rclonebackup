@@ -6,8 +6,8 @@ SERVER_NAME="$(ifconfig | grep broadcast | awk {'print $2'} | head -1)" # get IP
 TIMESTAMP=$(date +"%F")
 BACKUP_DIR="/root/backup/$TIMESTAMP"
 MYSQLPATH="$(mysql --help | grep "Default options" -A 1 | sed -n 2p | awk {'print $2'} | sed 's/\~/\/root/')"
-MYSQL_USER="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 3p)"
-MYSQL_PASSWORD="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 2p)"
+MYSQL_USER="root"
+MYSQL_PASSWORD="$(cat /root/passwords.txt | grep "MySQL Root Password" | awk {'print $5'})"
 MYSQL="$(which mysql)"
 MYSQLDUMP="$(which mysqldump)"
 SECONDS=0
@@ -17,7 +17,7 @@ NGINX_DIR="$(nginx -V 2>&1 | grep -o '\-\-conf-path=\(.*conf\)' | grep -o '.*/' 
 HTTPD="$(ls /etc/ | grep -w httpd)"
 HTTPD_DIR="$(httpd -S 2>&1 | grep ServerRoot | sed 's/\"//g' | awk {'print $2'})"
 LOG_DIR=/var/log/
-KUSANAGI="$(ls /home/ | grep kusanagi)"
+SENTORA="$(ls /var/ | grep sentora)"
 VNC_RCLONE="$(rclone config file | grep rclone.conf | sed 's/rclone.conf//')"
 VNC_RCLONE_REMOTE="$(cat $VNC_RCLONE/rclone.conf | grep "\[" | sed 's/\[//' | sed 's/\]//')"
 mkdir -p "$BACKUP_DIR"
@@ -42,18 +42,26 @@ fi
 
 echo "Starting Backup Website";
 # Loop through /home directory
-if [[ "$KUSANAGI" = "kusanagi" ]]; then
+if [ "$SENTORA" = "sentora" ]
+then
 
-	echo "VPS User kusanagi ";
-	echo "Backup kusanagi Config";
-	sleep 10
-	for D in /home/kusanagi/*; do
-    	if [ -d "${D}" ]; then #If a directory
-     	   domain=${D##*/} # Domain name
-        	echo "- "$domain;
-     	   zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # no cache
-   	 fi
-	done
+	echo "VPS User sentora ";
+	echo "Backup sentora Config";
+     for D in /var/sentora/hostdata/*; do
+  	  if [ -d "${D}" ]; then #If a directory
+        domain=${D##*/} # Domain name
+        echo "- "$domain;
+        zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # No Cache
+     	fi
+      done
+	cp /root/passwords.txt $BACKUP_DIR/sentora_password
+	cp -r /etc/sentora/configs/ $BACKUP_DIR/sentora_config
+	cp -r /etc/sentora/configs/apache/ $BACKUP_DIR/apache_config
+	cp -r /etc/sentora/configs/proftpd/ $BACKUP_DIR/apache_FTP
+	cp -r /var/sentora/logs/ $BACKUP_DIR/logs
+	cp -r /var/sentora/vmail/ $BACKUP_DIR/vmail
+else
+	echo "VPS Not User sentora";
 fi
 echo "Finished";
 echo '';

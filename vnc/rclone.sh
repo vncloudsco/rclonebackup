@@ -1,13 +1,12 @@
 #!/bin/bash
-
 SERVER_NAME="$(ifconfig | grep broadcast | awk {'print $2'} | head -1)" # get IP
 # SERVER_NAME="$(ifconfig | grep broadcast | awk {'print $2'} | awk '{if(NR==1) print $0}')"
 # SERVER_NAME="$(ifconfig | grep broadcast | awk {'print $2'} | sed -n 1p)"
 TIMESTAMP=$(date +"%F")
 BACKUP_DIR="/root/backup/$TIMESTAMP"
 MYSQLPATH="$(mysql --help | grep "Default options" -A 1 | sed -n 2p | awk {'print $2'} | sed 's/\~/\/root/')"
-MYSQL_USER="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 3p)"
-MYSQL_PASSWORD="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 2p)"
+MYSQL_USER="$(cat /usr/local/vesta/conf/mysql.conf | awk {'print $2'} | awk -F '=' {'print $NF'} | sed "s/'//g")"
+MYSQL_PASSWORD="$(cat /usr/local/vesta/conf/mysql.conf | awk {'print $3'} | awk -F '=' {'print $NF'} | sed "s/'//g")"
 MYSQL="$(which mysql)"
 MYSQLDUMP="$(which mysqldump)"
 SECONDS=0
@@ -17,7 +16,6 @@ NGINX_DIR="$(nginx -V 2>&1 | grep -o '\-\-conf-path=\(.*conf\)' | grep -o '.*/' 
 HTTPD="$(ls /etc/ | grep -w httpd)"
 HTTPD_DIR="$(httpd -S 2>&1 | grep ServerRoot | sed 's/\"//g' | awk {'print $2'})"
 LOG_DIR=/var/log/
-KUSANAGI="$(ls /home/ | grep kusanagi)"
 VNC_RCLONE="$(rclone config file | grep rclone.conf | sed 's/rclone.conf//')"
 VNC_RCLONE_REMOTE="$(cat $VNC_RCLONE/rclone.conf | grep "\[" | sed 's/\[//' | sed 's/\]//')"
 mkdir -p "$BACKUP_DIR"
@@ -41,20 +39,27 @@ fi
 
 
 echo "Starting Backup Website";
-# Loop through /home directory
-if [[ "$KUSANAGI" = "kusanagi" ]]; then
+# Loop through /home directory	
+	echo "VPS User Orther Control ";
+	echo "Backup Config";
 
-	echo "VPS User kusanagi ";
-	echo "Backup kusanagi Config";
-	sleep 10
-	for D in /home/kusanagi/*; do
+	for D in /home/*; do
     	if [ -d "${D}" ]; then #If a directory
-     	   domain=${D##*/} # Domain name
-        	echo "- "$domain;
-     	   zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # no cache
+        	domain=${D##*/} # Domain name
+      	  echo "- "$domain;
+		   	 zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
+    	fi
+	done
+
+
+	for D in /var/www/*; do
+    	if [ -d "${D}" ]; then #If a directory
+        	domain=${D##*/} # Domain name
+       	 echo "- "$domain;
+       	 zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
    	 fi
 	done
-fi
+
 echo "Finished";
 echo '';
 
