@@ -28,7 +28,7 @@ elif [[ "$EE" = "ee" ]]; then
 	wget http://rclone.vnclouds.co/ee/rclone.sh
 
 else
-	wget http://rclone.vnclouds.co/
+	wget http://rclone.vnclouds.co/vnc/rclone.sh
 
 
 fi
