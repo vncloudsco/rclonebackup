@@ -21,9 +21,7 @@ elif [[ "$DA" = "directadmin" ]]; then
 
 elif [[ "$VESTA" = "vesta" ]]; then
 	wget http://rclone.vnclouds.co/vesta/rclone.sh
-
-
-
+	
 elif [[ "$EE" = "ee" ]]; then
 	wget http://rclone.vnclouds.co/ee/rclone.sh
 
