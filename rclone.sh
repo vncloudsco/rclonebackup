@@ -36,4 +36,4 @@ else
 fi
 
 crontab -l | { cat; echo "0 1 * * *  /root/.config/script/rclone.sh"; } | crontab -
-rm -rf rclone.sh
+rm -f rclone.sh
