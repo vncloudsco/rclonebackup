@@ -6,8 +6,8 @@ SERVER_NAME="$(ifconfig | grep broadcast | awk {'print $2'} | head -1)" # get IP
 TIMESTAMP=$(date +"%F")
 BACKUP_DIR="/root/backup/$TIMESTAMP"
 MYSQLPATH="$(mysql --help | grep "Default options" -A 1 | sed -n 2p | awk {'print $2'} | sed 's/\~/\/root/')"
-MYSQL_USER="$(cat .my.cnf | grep user= | awk -F '=' {'print $NF'})"
-MYSQL_PASSWORD="$(cat .my.cnf | grep password= | awk -F '=' {'print $NF'})"
+MYSQL_USER="$(cat /root/.my.cnf | grep user= | awk -F '=' {'print $NF'})"
+MYSQL_PASSWORD="$(cat /root/.my.cnf | grep password= | awk -F '=' {'print $NF'})"
 MYSQL="$(which mysql)"
 MYSQLDUMP="$(which mysqldump)"
 SECONDS=0
