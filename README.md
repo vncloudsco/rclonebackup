@@ -106,6 +106,11 @@ After installation everything will be automatic and you do not need to do anythi
 ##### 6: cyberpanel
 The guest vps control please contact for installation assistance automatically: vituong[at]vnclouds.co
 For controls not in the list or you have customized it, please revise the code
+
+``` vi /root/.config/script/rclone.sh ```
+
+edit line
+
 ```
 MYSQL_USER="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 3p)"
 MYSQL_PASSWORD="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 2p)"
