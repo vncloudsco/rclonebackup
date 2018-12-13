@@ -65,7 +65,8 @@ Install from source
 Make sure you have at least Go 1.7 installed. Download go if necessary. The latest release is recommended. Then
 
 
-```git clone https://github.com/ncw/rclone.git
+```
+git clone https://github.com/ncw/rclone.git
 cd rclone
 go build
 ./rclone version
