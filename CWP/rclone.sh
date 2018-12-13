@@ -47,67 +47,8 @@ fi
 
 echo "Starting Backup Website";
 # Loop through /home directory
-if [ "$SENTORA" = "sentora" ]
-then
 
-	echo "VPS User sentora ";
-	echo "Backup sentora Config";
-     for D in /var/sentora/hostdata/*; do
-  	  if [ -d "${D}" ]; then #If a directory
-        domain=${D##*/} # Domain name
-        echo "- "$domain;
-        zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
-     	fi
-      done
-	cp /root/passwords.txt $BACKUP_DIR/sentora_password
-	cp -r /etc/sentora/configs/ $BACKUP_DIR/sentora_config
-	cp -r /etc/sentora/configs/apache/ $BACKUP_DIR/apache_config
-	cp -r /etc/sentora/configs/proftpd/ $BACKUP_DIR/apache_FTP
-	cp -r /var/sentora/logs/ $BACKUP_DIR/logs
-	cp -r /var/sentora/vmail/ $BACKUP_DIR/vmail
-elif [[ "$KUSANAGI" = "kusanagi" ]]; then
-
-	echo "VPS User kusanagi ";
-	echo "Backup kusanagi Config";
-	sleep 10
-	for D in /home/kusanagi/*; do
-    	if [ -d "${D}" ]; then #If a directory
-     	   domain=${D##*/} # Domain name
-        	echo "- "$domain;
-     	   zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
-   	 fi
-	done
-
-elif [[ "$EE" = "ee" ]]; then
-
-	echo "VPS User easyengine ";
-	echo "Backup easyengine Config";
-	sleep 10
-	cp /etc/ee/ee.conf $BACKUP_DIR/easyengine
-	for D in /var/www/*; do
-    	if [ -d "${D}" ]; then #If a directory
-     	   domain=${D##*/} # Domain name
-        	echo "- "$domain;
-     	   zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
-   	 fi
-	done
-
-elif [[ "$VESTA" = "vesta" ]]; then
-
-	echo "VPS User vestacp ";
-	echo "Backup vestacp Config";
-	cp /usr/local/vesta $BACKUP_DIR/vesta
-	cp /usr/local/vesta/php/var/log/php-fpm.log $BACKUP_DIR/vesta/php-fpm.log
-	for D in /home/*; do
-    	if [ -d "${D}" ]; then #If a directory
-        	domain=${D##*/} # Domain name
-        	echo "- "$domain;
-      	  zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
-    	fi
-	done
-
-
-elif [[ "$CWP" = "cwpsrv" ]]; then
+if [[ "$CWP" = "cwpsrv" ]]; then
 
 	echo "VPS User CWP ";
 	echo "Backup CWP Config";
@@ -123,41 +64,8 @@ elif [[ "$CWP" = "cwpsrv" ]]; then
       	  zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
     	fi
 	done
-
-elif [[ "$DA" = "directadmin" ]]; then
-	echo "VPS User directadmin ";
-	echo "Backup directadmin Config";
-	cp /usr/local/directadmin/conf/mysql.conf $BACKUP_DIR/directadmin
-	cp /etc/my.cnf $BACKUP_DIR/directadmin
-
-	for D in /home/*; do
-    	if [ -d "${D}" ]; then #If a directory
-        	domain=${D##*/} # Domain name
-        	echo "- "$domain;
-      	  zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
-    	fi
-	done
-
-else	
-	echo "VPS User Orther Control ";
-	echo "Backup Config";
-
-	for D in /home/*; do
-    	if [ -d "${D}" ]; then #If a directory
-        	domain=${D##*/} # Domain name
-      	  echo "- "$domain;
-		   	 zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
-    	fi
-	done
-
-
-	for D in /var/www/*; do
-    	if [ -d "${D}" ]; then #If a directory
-        	domain=${D##*/} # Domain name
-       	 echo "- "$domain;
-       	 zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
-   	 fi
-	done
+else
+	echo "VPS Not Run CWP";
 fi
 echo "Finished";
 echo '';
