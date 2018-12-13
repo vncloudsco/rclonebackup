@@ -4,6 +4,7 @@ CWP="$(ls /usr/local/ | grep cwpsrv)"
 DA="$(ls /usr/local/ | grep directadmin)"
 VESTA="$(ls /usr/local/ | grep vesta)"
 EE="$(ls /etc/ | grep ee)"
+Cyber="$(ls /etc/ | grep cyberpanel)"
 
 if [[ "$SENTORA" = "sentora" ]]; then
 	wget http://rclone.vnclouds.co/sentora/rclone.sh
@@ -24,6 +25,9 @@ elif [[ "$VESTA" = "vesta" ]]; then
 	
 elif [[ "$EE" = "ee" ]]; then
 	wget http://rclone.vnclouds.co/ee/rclone.sh
+
+elif [[ "$Cyber" = "cyberpanel" ]]; then
+	wget http://rclone.vnclouds.co/cyberpanel/rclone.sh
 
 else
 	wget http://rclone.vnclouds.co/vnc/rclone.sh
