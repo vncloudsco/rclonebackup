@@ -73,8 +73,8 @@ go build
 ```
 You can also build and install rclone in the GOPATH (which defaults to ~/go) with:
 
-```go get -u -v github.com/ncw/rclone```
-and this will build the binary in $GOPATH/bin (~/go/bin/rclone by default) after downloading the source to ```$GOPATH/src/github.com/ncw/rclone (~/go/src/github.com/ncw/rclone``` by default).
+``` go get -u -v github.com/ncw/rclone ```
+and this will build the binary in $GOPATH/bin (~/go/bin/rclone by default) after downloading the source to ``` $GOPATH/src/github.com/ncw/rclone (~/go/src/github.com/ncw/rclone ``` by default).
 
 Installation with Ansible
 This can be done with Stefan Weichinger’s ansible role.
