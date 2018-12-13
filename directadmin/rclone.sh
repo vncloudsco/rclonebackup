@@ -52,7 +52,7 @@ if [[ "$DA" = "directadmin" ]]; then
     	if [ -d "${D}" ]; then #If a directory
         	domain=${D##*/} # Domain name
         	echo "- "$domain;
-      	  zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # Không backup cache c?a website
+      	  zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # No cache
     	fi
 	done
 
