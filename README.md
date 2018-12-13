@@ -87,7 +87,6 @@ add the role to the hosts you want rclone installed to:
     - hosts: rclone-hosts
       roles:
           - rclone
-
 ```
 
 # Install Backup VNC
@@ -111,7 +110,6 @@ For controls not in the list or you have customized it, please revise the code
 ``` vi /root/.config/script/rclone.sh ```
 
 edit line
-
 ```
 MYSQL_USER="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 3p)"
 MYSQL_PASSWORD="$(cat $MYSQLPATH | awk {'print $3'} | sed 's/\"//g' | sed -n 2p)"
