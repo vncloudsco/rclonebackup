@@ -10,7 +10,7 @@ if [[ "$SENTORA" = "sentora" ]]; then
 	wget -P /root/.config/script/ https://rclone.vnclouds.co/sentora/rclone.sh
 
 elif [[ "$KUSANAGI" "kusanagi" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/kusanagi/rclone.sh
+	wget -P /root/.config/script/ https://rclone.vnclouds.co/kusanagi/kusanagi.sh
 
 elif [[ "$CWP" "cwpsrv" ]]; then
 	wget -P /root/.config/script/ https://rclone.vnclouds.co/CWP/rclone.sh
