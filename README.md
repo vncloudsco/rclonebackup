@@ -126,3 +126,4 @@ MYSQL_PASSWORD= user pass root mysql your vps
 Report Bug to: support[at]vnclouds.edu.vn
 
 [Change Log](https://rclone.vnclouds.co/changelog.txt)
+A request has been sent to us requesting kusanagi encryption so it will be encrypted. Because this is genuine copyrighted software I can not do anything. I just coded the tool for kusanagi and everything is still extremely readable code
