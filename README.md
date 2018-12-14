@@ -90,9 +90,11 @@ add the role to the hosts you want rclone installed to:
           - rclone
 ```
 
+#### To configure rclone please read the home page rclone.org
+
 # Install Backup VNC
 
-This is a tool to automatically find the configuration for Rclone
+This is a tool to automatically find the configuration for Rclone 
 
 ### install 
 
