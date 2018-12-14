@@ -1,2 +1,3 @@
+V0.1.002 Fix Bug Kusanagi not grep mysql thank to nct
 V0.1.001 fix bug vesta not working
 V0.1  Start
