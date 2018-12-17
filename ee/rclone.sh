@@ -51,8 +51,9 @@ for D in $DOMAIN; do
 		DB="$(ee site info $D | grep "DB Name" | awk {'print $5'})"
 		DB_USER="$(ee site info $D | grep "DB User" | awk {'print $5'})"
 		DB_Pass="$(ee site info $D | grep "DB Password" | awk {'print $5'})"
+		DB_Host="$(ee site info $D | grep "DB Host" | awk {'print $5'})"
 		mkdir -p $BACKUP_DIR/$db/
-    	docker exec ee-global-db /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD $db > $BACKUP_DIR/$db/$db.sql
+    	docker exec ee-$DB_Host /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD $db > $BACKUP_DIR/$db/$db.sql
 done
 DI="$(ee site list | awk {'print $1'} | sed 's/\.//' | sed 's/site//' | sed 's/$/_htdocs/' | sed '1d')"
 
