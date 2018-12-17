@@ -56,7 +56,8 @@ if [[ "$CWP" = "cwpsrv" ]]; then
     	if [ -d "${D}" ]; then #If a directory
         	domain=${D##*/} # Domain name
         	echo "- "$domain;
-      	  zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # No cache
+        	mkdrir -p $BACKUP_DIR/$domain/
+      	  zip -r $BACKUP_DIR/$domain/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # No cache
     	fi
 	done
 else
