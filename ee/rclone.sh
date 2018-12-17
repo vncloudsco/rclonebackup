@@ -22,7 +22,7 @@ echo "Backup easyengine Config";
 sleep 10
 cp /etc/ee $BACKUP_DIR/easyengine
 EECHEKER="$(ls /var/ | grep www)"
-ap-get install zip -y
+apt-get install zip -y
 if [[ "$EECHEKER" = "www" ]]; then
 
 echo "easyengine v3";
