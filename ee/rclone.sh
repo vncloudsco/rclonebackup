@@ -58,7 +58,7 @@ DI="$(ee site list | awk {'print $1'} | sed 's/\.//' | sed 's/site//' | sed 's/$
     	if [ -d "${D}" ]; then #If a directory
      	   domain=${D##*/} # Domain name
         	echo "- "$domain;
-     	   zip -r $BACKUP_DIR/$domain.zip /var/lib/docker/volumes/$DI -q -x /var/lib/docker/volumes/$DI/_data/htdocswp-content/cache/**\* # 
+     	   zip -r $BACKUP_DIR/$domain.zip /var/lib/docker/volumes/$DI -q -x /var/lib/docker/volumes/$DI/_data/htdocs/wp-content/cache/**\* # 
      	fi
     done
 
