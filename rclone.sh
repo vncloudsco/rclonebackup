@@ -3,7 +3,7 @@ KUSANAGI="$(ls /home/ | grep kusanagi)"
 CWP="$(ls /usr/local/ | grep cwpsrv)"
 DA="$(ls /usr/local/ | grep directadmin)"
 VESTA="$(ls /usr/local/ | grep vesta)"
-EE="$(ls /etc/ | grep ee)"
+EE="$(ls /root/ | grep ee)"
 Cyber="$(ls /etc/ | grep cyberpanel)"
 
 if [[ "$SENTORA" = "sentora" ]]; then
