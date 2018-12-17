@@ -25,7 +25,7 @@ EECHEKER="$(ls /var/ | grep www)"
 ap-get install zip -y
 if [[ "$EECHEKER" = "www" ]]; then
 
-ee v3
+echo "easyengine v3";
 	for D in /var/www/*; do
     	if [ -d "${D}" ]; then #If a directory
      	   domain=${D##*/} # Domain name
@@ -43,7 +43,7 @@ ee v3
 	done
 
 else
-	echo eev4
+	echo "easyengine v4";
 
 DOMAIN="$(ee site list | awk {'print $1'} | sed 's/site//' | sed '1d')" # => echo ra domain
 for D in $DOMAIN; do
