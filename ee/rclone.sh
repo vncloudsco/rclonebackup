@@ -12,7 +12,7 @@ NGINX_DIR="$(nginx -V 2>&1 | grep -o '\-\-conf-path=\(.*conf\)' | grep -o '.*/' 
 HTTPD="$(ls /etc/ | grep -w httpd)"
 HTTPD_DIR="$(httpd -S 2>&1 | grep ServerRoot | sed 's/\"//g' | awk {'print $2'})"
 LOG_DIR=/var/log/
-EE="$(ls /etc/ | grep ee)"
+EE="$(ls /root/ | grep ee)"
 VNC_RCLONE="$(rclone config file | grep rclone.conf | sed 's/rclone.conf//')"
 VNC_RCLONE_REMOTE="$(cat $VNC_RCLONE/rclone.conf | grep "\[" | sed 's/\[//' | sed 's/\]//')"
 mkdir -p "$BACKUP_DIR"
@@ -21,11 +21,16 @@ echo "VPS User easyengine ";
 echo "Backup easyengine Config";
 sleep 10
 cp /etc/ee $BACKUP_DIR/easyengine
+EECHEKER="$(ls /var/ | grep www)"
+ap-get install zip -y
+if [[ "$EECHEKER" = "www" ]]; then
+
+ee v3
 	for D in /var/www/*; do
     	if [ -d "${D}" ]; then #If a directory
      	   domain=${D##*/} # Domain name
         	echo "- "$domain;
-     	   zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # 
+     	   zip -r $BACKUP_DIR/$domain.zip /var/www/$domain -q -x /var/www/$domain/wp-content/cache/**\* # 
 
      	mkdir -p "$BACKUP_DIR/mysql"
      	MYSQL_USER="$(cat /var/www/$domain/wp-config.php | grep DB_USER | awk {'print $3'} | sed "s/'//g")"
@@ -36,6 +41,29 @@ cp /etc/ee $BACKUP_DIR/easyengine
 	echo '';
    	 fi
 	done
+
+else
+	echo eev4
+
+DOMAIN="$(ee site list | awk {'print $1'} | sed 's/site//' | sed '1d')" # => echo ra domain
+for D in $DOMAIN; do
+DB="$(ee site info $D | grep "DB Name" | awk {'print $5'})"
+DB_USER="$(ee site info $D | grep "DB User" | awk {'print $5'})"
+DB_Pass="$(ee site info $D | grep "DB Password" | awk {'print $5'})"
+$MYSQLDUMP --user=$DB_USER -p$DB_Pass --databases $DB | gzip > "$BACKUP_DIR/mysql/$db.sql.gz"
+done
+DI="$(ee site list | awk {'print $1'} | sed 's/\.//' | sed 's/site//' | sed 's/$/_htdocs/' | sed '1d')"
+
+	for D in /var/lib/docker/volumes/*; do
+    	if [ -d "${D}" ]; then #If a directory
+     	   domain=${D##*/} # Domain name
+        	echo "- "$domain;
+     	   zip -r $BACKUP_DIR/$domain.zip /var/lib/docker/volumes/$DI -q -x /var/lib/docker/volumes/$DI/_data/htdocswp-content/cache/**\* # 
+     	fi
+    done
+
+fi
+
 echo "khong co loi";
 
 echo "Finished";
