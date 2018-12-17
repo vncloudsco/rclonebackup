@@ -38,7 +38,7 @@ echo "easyengine v3";
      	db="$(cat /var/www/$domain/wp-config.php | grep DB_NAME | awk {'print $3'} | sed "s/'//g")"
 #    	$MYSQLDUMP --user=$MYSQL_USER -p$MYSQL_PASSWORD --databases $db | gzip > "$BACKUP_DIR/mysql/$db.sql.gz"
 #    	docker exec -i ee-global-db mysql -u$MYSQL_USER --p$MYSQL_PASSWORD --database=$db > dump.sql
-    	docker exec ee-global-db /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD $db > backup.sql
+    	docker exec ee-global-db /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD $db > $BACKUP_DIR/$db/$db.sql
 	echo "Finished";
 	echo '';
    	 fi
