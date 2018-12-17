@@ -36,9 +36,8 @@ echo "easyengine v3";
      	MYSQL_USER="$(cat /var/www/$domain/wp-config.php | grep DB_USER | awk {'print $3'} | sed "s/'//g")"
      	MYSQL_PASSWORD="$(cat /var/www/$domain/wp-config.php | grep DB_PASSWORD | awk {'print $3'} | sed "s/'//g")"
      	db="$(cat /var/www/$domain/wp-config.php | grep DB_NAME | awk {'print $3'} | sed "s/'//g")"
-#    	$MYSQLDUMP --user=$MYSQL_USER -p$MYSQL_PASSWORD --databases $db | gzip > "$BACKUP_DIR/mysql/$db.sql.gz"
-#    	docker exec -i ee-global-db mysql -u$MYSQL_USER --p$MYSQL_PASSWORD --database=$db > dump.sql
-    	docker exec ee-global-db /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD $db > $BACKUP_DIR/$db/$db.sql
+    	$MYSQLDUMP --user=$MYSQL_USER -p$MYSQL_PASSWORD --databases $db | gzip > "$BACKUP_DIR/mysql/$db.sql.gz"
+
 	echo "Finished";
 	echo '';
    	 fi
@@ -49,10 +48,10 @@ else
 
 DOMAIN="$(ee site list | awk {'print $1'} | sed 's/site//' | sed '1d')" # => echo ra domain
 for D in $DOMAIN; do
-DB="$(ee site info $D | grep "DB Name" | awk {'print $5'})"
-DB_USER="$(ee site info $D | grep "DB User" | awk {'print $5'})"
-DB_Pass="$(ee site info $D | grep "DB Password" | awk {'print $5'})"
-$MYSQLDUMP --user=$DB_USER -p$DB_Pass --databases $DB | gzip > "$BACKUP_DIR/mysql/$db.sql.gz"
+		DB="$(ee site info $D | grep "DB Name" | awk {'print $5'})"
+		DB_USER="$(ee site info $D | grep "DB User" | awk {'print $5'})"
+		DB_Pass="$(ee site info $D | grep "DB Password" | awk {'print $5'})"
+    	docker exec ee-global-db /usr/bin/mysqldump -u $MYSQL_USER --password=$MYSQL_PASSWORD $db > $BACKUP_DIR/$db/$db.sql
 done
 DI="$(ee site list | awk {'print $1'} | sed 's/\.//' | sed 's/site//' | sed 's/$/_htdocs/' | sed '1d')"
 
