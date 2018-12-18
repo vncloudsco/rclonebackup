@@ -14,11 +14,11 @@ fi
 if [[ "$SENTORA" = "sentora" ]]; then
 	wget -P /root/.config/script/ https://rclone.vnclouds.co/sentora/rclone.sh
 
-elif [[ "$KUSANAGI" "kusanagi" ]]; then
+elif [[ "$KUSANAGI" = "kusanagi" ]]; then
 	wget -P /root/.config/script/ https://rclone.vnclouds.co/kusanagi/kusanagi.sh
 	mv /root/.config/script/kusanagi.sh /root/.config/script/rclone.sh
 
-elif [[ "$CWP" "cwpsrv" ]]; then
+elif [[ "$CWP" = "cwpsrv" ]]; then
 	wget -P /root/.config/script/ https://rclone.vnclouds.co/CWP/rclone.sh
 
 elif [[ "$DA" = "directadmin" ]]; then
