@@ -57,14 +57,43 @@ for D in $DOMAIN; do
 done
 DI="$(ee site list | awk {'print $1'} | sed 's/\.//' | sed 's/site//' | sed 's/$/_htdocs/' | sed '1d')"
 
-	for D in /var/lib/docker/volumes/*; do
-    	if [ -d "${D}" ]; then #If a directory
-     	   domain=${D##*/} # Domain name
-        	echo "- "$domain;
-        	mkdrir -p $BACKUP_DIR/$domain/
-     	   zip -r $BACKUP_DIR/$domain/$domain.zip /var/lib/docker/volumes/$DI -q -x /var/lib/docker/volumes/$DI/_data/htdocs/wp-content/cache/**\* # 
-     	fi
-    done
+backup_path="/root/backup/$TIMESTAMP"
+#backup_path="/home/core/backups"
+tar_opts="--exclude='/var/run/*'"
+cd "${BASH_SOURCE%/*}" || exit
+
+mkdir -p $backup_path
+for i in `docker inspect --format='{{.Name}}' $(docker ps -q) | cut -f2 -d\/`
+        do container_name=$i
+        mkdir -p $backup_path/$container_name
+        echo -n "$container_name - "
+	docker run --rm \
+  	--volumes-from $container_name \
+  	-v $backup_path:/backup \
+  	-e TAR_OPTS="$tar_opts" \
+  	piscue/docker-backup \
+        backup "$container_name/$container_name-volume.tar.xz"
+	echo "OK"
+done
+
+
+for i in `docker inspect --format='{{.Name}}' $(docker ps -q) | cut -f2 -d\/`
+        do container_name=$i
+        echo -n "$container_name - "
+        container_image=`docker inspect --format='{{.Config.Image}}' $container_name`
+        mkdir -p $backup_path/$container_name
+        save_file="$backup_path/$container_name/$container_name-image.tar"
+        docker save -o $save_file $container_image
+        echo "OK"
+done
+ # for D in /var/lib/docker/volumes/*; do
+ #    	if [ -d "${D}" ]; then #If a directory
+ #     	   domain=${D##*/} # Domain name
+ #        	echo "- "$domain;
+ #        	mkdrir -p $BACKUP_DIR/$domain/
+ #     	   zip -r $BACKUP_DIR/$domain/$domain.zip /var/lib/docker/volumes/$DI -q -x /var/lib/docker/volumes/$DI/_data/htdocs/wp-content/cache/**\* # 
+ #     	fi
+ #    done
 
 fi
 
