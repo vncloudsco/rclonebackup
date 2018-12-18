@@ -5,6 +5,7 @@ DA="$(ls /usr/local/ | grep directadmin)"
 VESTA="$(ls /usr/local/ | grep vesta)"
 EE="$(ls /root/ | grep ee)"
 Cyber="$(ls /etc/ | grep cyberpanel)"
+EEV4="$(ls /var/lib/docker/ | grep volumes)"
 
 if [[ "$SENTORA" = "sentora" ]]; then
 	wget -P /root/.config/script/ https://rclone.vnclouds.co/sentora/rclone.sh
@@ -25,6 +26,9 @@ elif [[ "$VESTA" = "vesta" ]]; then
 	wget -P /root/.config/script/ https://rclone.vnclouds.co/vesta/rclone.sh
 	
 elif [[ "$EE" = "ee" ]]; then
+	wget -P /root/.config/script/ https://rclone.vnclouds.co/ee/rclone.sh
+	
+elif [[ "$EEV4" = "volumes" ]]; then
 	wget -P /root/.config/script/ https://rclone.vnclouds.co/ee/rclone.sh
 
 elif [[ "$Cyber" = "cyberpanel" ]]; then
