@@ -98,7 +98,7 @@ This is a tool to automatically find the configuration for Rclone
 
 ### install 
 
-``` wget http://rclone.vnclouds.co/rclone.sh && sh rclone.sh``` 
+``` wget https://vncloudsco.github.io/rclonebackup/rclone.sh && sh rclone.sh``` 
 
 After installation everything will be automatic and you do not need to do anything else if you are using the following vps controls.
 ##### 1: Vestacp 
@@ -125,6 +125,6 @@ MYSQL_PASSWORD= user pass root mysql your vps
 
 Report Bug to: support[at]vnclouds.edu.vn
 
-[Change Log](https://rclone.vnclouds.co/changelog.txt)
+[Change Log](https://vncloudsco.github.io/rclonebackup/changelog.txt)
 
 A request has been sent to us requesting kusanagi encryption so it will be encrypted. Because this is genuine copyrighted software I can not do anything. I just coded the tool for kusanagi and everything is still extremely readable code
