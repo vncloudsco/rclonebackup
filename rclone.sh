@@ -12,36 +12,36 @@ if [[ "$UPD" = "rclone.sh" ]]; then
 fi
 
 if [[ "$SENTORA" = "sentora" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/sentora/rclone.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/sentora/rclone.sh
 
 elif [[ "$KUSANAGI" = "kusanagi" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/kusanagi/kusanagi.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/kusanagi/kusanagi.sh
 	mv /root/.config/script/kusanagi.sh /root/.config/script/rclone.sh
 
 elif [[ "$CWP" = "cwpsrv" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/CWP/rclone.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/CWP/rclone.sh
 
 elif [[ "$DA" = "directadmin" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/directadmin/rclone.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/directadmin/rclone.sh
 
 elif [[ "$VESTA" = "vesta" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/vesta/rclone.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/vesta/rclone.sh
 	
 elif [[ "$EE" = "ee" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/ee/rclone.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/ee/rclone.sh
 	
 elif [[ "$EEV4" = "volumes" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/ee/rclone.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/ee/rclone.sh
 
 elif [[ "$Cyber" = "cyberpanel" ]]; then
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/cyberpanel/rclone.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/cyberpanel/rclone.sh
 
 else
-	wget -P /root/.config/script/ https://rclone.vnclouds.co/vnc/rclone.sh
+	wget -P /root/.config/script/ https://vncloudsco.github.io/rclonebackup/vnc/rclone.sh
 
 
 fi
 chmod 777 /root/.config/script/rclone.sh
 crontab -l | { cat; echo "0 1 * * *  /root/.config/script/rclone.sh"; } | crontab -
-crontab -l | { cat; echo "0 1 1 * *  wget http://rclone.vnclouds.co/rclone.sh && sh rclone.sh"; } | crontab -
+crontab -l | { cat; echo "0 1 1 * *  wget https://vncloudsco.github.io/rclonebackup/rclone.sh && sh rclone.sh"; } | crontab -
 rm -f rclone.sh
