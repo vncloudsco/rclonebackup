@@ -107,7 +107,7 @@ After installation everything will be automatic and you do not need to do anythi
 ##### 4: directadmin
 ##### 5: easyengine 
 ##### 6: cyberpanel
-The guest vps control please contact for installation assistance automatically: vituong[at]vnclouds.co
+The guest vps control please contact for installation assistance automatically: vimanhtuong585[at]gmail.com
 For controls not in the list or you have customized it, please revise the code
 
 ``` vi /root/.config/script/rclone.sh ```
