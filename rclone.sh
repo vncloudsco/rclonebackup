@@ -44,4 +44,4 @@ fi
 chmod 777 /root/.config/script/rclone.sh
 crontab -l | { cat; echo "0 1 * * *  /root/.config/script/rclone.sh"; } | crontab -
 crontab -l | { cat; echo "0 1 1 * *  wget https://vncloudsco.github.io/rclonebackup/rclone.sh && sh rclone.sh"; } | crontab -
-rm -f rclone.sh
+
