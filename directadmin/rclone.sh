@@ -22,9 +22,9 @@ VNC_RCLONE="$(rclone config file | grep rclone.conf | sed 's/rclone.conf//')"
 VNC_RCLONE_REMOTE="$(cat $VNC_RCLONE/rclone.conf | grep "\[" | sed 's/\[//' | sed 's/\]//')"
 mkdir -p "$BACKUP_DIR"
 yum install zip -v || apt install zip -v
-if [[ $CHECKSQL == "mysql" ]];
+command -v mysql || echo "VPS not install Mysql"
+echo "backup mysql start"
 
-then
  	mkdir -p "$BACKUP_DIR/mysql"
   		databases=`$MYSQL --user=$MYSQL_USER -p$MYSQL_PASSWORD -e "SHOW DATABASES;" | grep -Ev "(Database|information_schema|performance_schema|mysql)"`
 
@@ -35,10 +35,9 @@ then
 	done
 	echo "Finished";
 	echo '';
-else
-	echo "VPS not install Mysql"
-fi
--
+
+	
+
 
 echo "Starting Backup Website";
 # Loop through /home directory
