@@ -21,7 +21,7 @@ DA="$(ls /usr/local/ | grep directadmin)"
 VNC_RCLONE="$(rclone config file | grep rclone.conf | sed 's/rclone.conf//')"
 VNC_RCLONE_REMOTE="$(cat $VNC_RCLONE/rclone.conf | grep "\[" | sed 's/\[//' | sed 's/\]//')"
 mkdir -p "$BACKUP_DIR"
-
+yum install zip -v || apt install zip -v
 if [[ $CHECKSQL == "mysql" ]];
 
 then
@@ -38,7 +38,7 @@ then
 else
 	echo "VPS not install Mysql"
 fi
-
+-
 
 echo "Starting Backup Website";
 # Loop through /home directory
@@ -52,7 +52,7 @@ if [[ "$DA" = "directadmin" ]]; then
     	if [ -d "${D}" ]; then #If a directory
         	domain=${D##*/} # Domain name
         	echo "- "$domain;
-        	mkdrir -p $BACKUP_DIR/$domain/
+        	mkdir -p $BACKUP_DIR/$domain/
       	  zip -r $BACKUP_DIR/$domain/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # No cache
     	fi
 	done
@@ -95,6 +95,8 @@ fi
 
 size=$(du -sh $BACKUP_DIR | awk '{ print $1}')
 echo "Starting Uploading Backup";
+echo "Starting Uploading Backup";
+98
 
 for i in $VNC_RCLONE_REMOTE
 	do
