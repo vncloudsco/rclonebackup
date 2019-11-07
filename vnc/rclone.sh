@@ -5,8 +5,8 @@ SERVER_NAME="$(ifconfig | grep broadcast | awk {'print $2'} | head -1)" # get IP
 TIMESTAMP=$(date +"%F")
 BACKUP_DIR="/root/backup/$TIMESTAMP"
 MYSQLPATH="$(mysql --help | grep "Default options" -A 1 | sed -n 2p | awk {'print $2'} | sed 's/\~/\/root/')"
-MYSQL_USER="$(cat /usr/local/vesta/conf/mysql.conf | awk {'print $2'} | awk -F '=' {'print $NF'} | sed "s/'//g")"
-MYSQL_PASSWORD="$(cat /usr/local/vesta/conf/mysql.conf | awk {'print $3'} | awk -F '=' {'print $NF'} | sed "s/'//g")"
+MYSQL_USER="usser_here"
+MYSQL_PASSWORD="passwd_here"
 MYSQL="$(which mysql)"
 MYSQLDUMP="$(which mysqldump)"
 SECONDS=0
@@ -47,8 +47,8 @@ echo "Starting Backup Website";
     	if [ -d "${D}" ]; then #If a directory
         	domain=${D##*/} # Domain name
       	  echo "- "$domain;
-      	  mkdrir -p $BACKUP_DIR/$domain/
-		   	 zip -r $BACKUP_DIR/$domain/$domain.zip /var/www/$domain -q -x home/$domain/wp-content/cache/**\* # No cache
+      	  mkdir -p $BACKUP_DIR/$domain/
+		   	 zip -r $BACKUP_DIR/$domain/$domain.zip /home/$domain -q -x home/$domain/wp-content/cache/**\* # No cache
     	fi
 	done
 
